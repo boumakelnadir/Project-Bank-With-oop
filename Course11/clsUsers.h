@@ -161,7 +161,7 @@ private:
 
 public:
 
-    enum Permissions
+    enum enPermissions
     {
         pAll = -1, pListClient = 1, pAddNewClient = 2, pDeleteClient = 4,
         pUpdateClient = 8, pFindClient = 16, PTransactions = 32, pManageUsers = 64

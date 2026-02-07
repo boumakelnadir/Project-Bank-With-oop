@@ -16,10 +16,11 @@ private:
 	static void _PrintUsersRecordLine(clsUser U)
 	{
 		
+		cout << "| " << left << setw(12) << U.UserName;
 		cout << "| " << left << setw(25) << U.FullName();
 		cout << "| " << left << setw(15) << U.PhoneNumber;
 		cout << "| " << left << setw(20) << U.Email;
-		cout << "| " << left << setw(20) << U.Password;
+		cout << "| " << left << setw(12) << U.Password;
 		cout << "| " << left << setw(15) << U.Permissions;
 	}
 
@@ -39,10 +40,11 @@ public:
 		cout << "\n\n\t|------------------------------------------------------------------------------------------------------------|\n";
 
 		
-		cout << "\t| " << left << setw(25) << "Full Name";
+		cout << "\t| " << left << setw(12) << "User";
+		cout << "| " << left << setw(25) << "Full Name";
 		cout << "| " << left << setw(15) << "Phone";
 		cout << "| " << left << setw(20) << "Email";
-		cout << "| " << left << setw(20) << "Password";
+		cout << "| " << left << setw(12) << "Password";
 		cout << "| " << left << setw(15) << "Permissions";
 		cout << "\n\t|------------------------------------------------------------------------------------------------------------|\n";
 
