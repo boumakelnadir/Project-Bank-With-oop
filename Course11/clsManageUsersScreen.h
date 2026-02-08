@@ -2,12 +2,11 @@
 #include <iostream>
 #include "clsScreenHeader.h"
 #include "clsInputValidate.h"
-
 #include "clsUserListScreen.h"
 #include "clsAddNewUserScreen.h"
-//#include "clsDeleteUserScreen.h"
-//#include "clsUpdateUserScreen.h"
-//#include "clsFindUserScreen.h"
+#include "clsDeleteUserScreen.h"
+#include "clsUpdateUserScreen.h"
+#include "clsFindUserScreen.h"
 
 
 using namespace std;
@@ -39,17 +38,17 @@ private:
 
 	static void _ShowDeleteUserScreen()
 	{
-		//clsDeleteUserScreen::ShowDeleteUserScreen();
+		clsDeleteUserScreen::ShowDeleteUserScreen();
 	};
 
 	static void _ShowUpdateUserScreen()
 	{
-		//clsUpdateUserScreen::ShowUpdateUserScreen();
+		clsUpdateUserScreen::ShowUpdateUserScreen();
 	};
 
 	static void _ShowFindUserScreen()
 	{
-		//clsFindUserScreen::ShowFindUserScreen();
+		clsFindUserScreen::ShowFindUserScreen();
 	};
 
 	static void _GoBackToManageUsersMenue()

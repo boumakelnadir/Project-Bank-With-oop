@@ -98,6 +98,15 @@
     <ClInclude Include="clsAddNewUserScreen.h">
       <Filter>Header Files\Sub Menue ManageUsers</Filter>
     </ClInclude>
+    <ClInclude Include="clsDeleteUserScreen.h">
+      <Filter>Header Files\Sub Menue ManageUsers</Filter>
+    </ClInclude>
+    <ClInclude Include="clsUpdateUserScreen.h">
+      <Filter>Header Files\Sub Menue ManageUsers</Filter>
+    </ClInclude>
+    <ClInclude Include="clsFindUserScreen.h">
+      <Filter>Header Files\Sub Menue ManageUsers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Course11.rc">

@@ -11,79 +11,42 @@ class clsUpdateClientScreen : protected clsScreen
 {
 private:
 
-	static void _ReadClientInfo(clsBankClient& Client)
-	{
-		char Answer = 'N';
+    static void _ReadClientInfo(clsBankClient& client)
+    {
+        cout << "\n\tEnter FirstName: ";
+        client.FirstName = clsInputValidate::ReadString();
 
-		cout << "\n\n\tDo You Want Update First Name [Y/N] ? ";
-		cin >> Answer;
+        cout << "\n\tEnter LastName: ";
+        client.LastName = clsInputValidate::ReadString();
 
-		if (toupper(Answer) == 'Y')
-		{
-			cout << "\tPlease Enter First Name : ";
-			Client.FirstName = clsInputValidate::ReadString();
-		}
-		
-		cout << "\n\n\tDo You Want Update Last Name [Y/N] ? ";
-		cin >> Answer;
+        cout << "\n\tEnter Email: ";
+        client.Email = clsInputValidate::ReadString();
 
-		if (toupper(Answer) == 'Y')
-		{
-			cout << "\tPlease Enter Last Name : ";
-			Client.LastName = clsInputValidate::ReadString();
-		}
-		
-		cout << "\n\n\tDo You Want Update Email [Y/N] ? ";
-		cin >> Answer;
-		
-		if(toupper(Answer) == 'Y')
-		{
-			cout << "\tPlease Enter Email : ";
-			Client.Email = clsInputValidate::ReadString();
-		}
-		
-		cout << "\n\n\tDo You Want Update Phone Number [Y/N] ? ";
-		cin >> Answer;
-		
-		if (toupper(Answer) == 'Y')
-		{
-			cout << "\tPlease Enter Phone Number : ";
-			Client.PhoneNumber = clsInputValidate::ReadString();
-		}
-		
-		cout << "\n\n\tDo You Want Update Pin Code [Y/N] ? ";
-		cin >> Answer;
-		
-		if (toupper(Answer) == 'Y')
-		{
-			cout << "\tPlease Enter PinCode : ";
-			Client.PinCode = clsInputValidate::ReadString();
-		}
-		
-		cout << "\n\n\tDo You Want Update Account Balance [Y/N] ? ";
-		cin >> Answer;
+        cout << "\n\tEnter Phone: ";
+        client.PhoneNumber = clsInputValidate::ReadString();
 
-		if (toupper(Answer) == 'Y')
-		{
-			cout << "\tPlease Enter Account Balance : ";
-			Client.AccountBalance = clsInputValidate::ReadDblNumber();
-		}
-	}
+        cout << "\n\tEnter PinCode : ";
+        client.PinCode = clsInputValidate::ReadString();
 
-	static void _PrintClientCard(clsBankClient Client)
-	{
-		cout << "\n\t------------------------------";
-		cout << "\n\t\tCard Client" ;
-		cout << "\n\t------------------------------";
-		cout << "\n\tFirst Name     = " << Client.FirstName;
-		cout << "\n\tLast Name      = " << Client.LastName;
-		cout << "\n\tEmail          = " << Client.Email;
-		cout << "\n\tPhoneNumber    = " << Client.PhoneNumber;
-		cout << "\n\tAccountNumber  = " << Client.GetAccountNumber();
-		cout << "\n\tPinCode        = " << Client.PinCode;
-		cout << "\n\tAccountBalance = " << Client.AccountBalance;
-		cout << "\n\t------------------------------";
-	}
+        cout << "\n\tEnter Balance : ";
+        client.AccountBalance = clsInputValidate::ReadDblNumber();
+    }
+
+    static void _PrintClientCard(clsBankClient& Client)
+    {
+        cout << "\n\tClient Card:";
+        cout << "\n\t___________________";
+        cout << "\n\tAccount Number : " << Client.GetAccountNumber();
+        cout << "\n\tFirstName   : " << Client.FirstName;
+        cout << "\n\tLastName    : " << Client.LastName;
+        cout << "\n\tFull Name   : " << Client.FullName();
+        cout << "\n\tEmail       : " << Client.Email;
+        cout << "\n\tPhone       : " << Client.PhoneNumber;
+        cout << "\n\tPinCode     : " << Client.PinCode;
+        cout << "\n\tAccount Balance    : " << Client.AccountBalance;
+        cout << "\n\t___________________\n";
+
+    }
 
 public:
 
