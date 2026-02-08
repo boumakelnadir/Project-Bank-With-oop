@@ -103,7 +103,7 @@ private:
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::PTransactions;
+            Permissions += clsUser::enPermissions::pTransactions;
         }
 
         cout << "\n\tManage Users? y/n? ";

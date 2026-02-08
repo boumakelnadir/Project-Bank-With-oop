@@ -1,49 +1,50 @@
 #pragma once
 #include <iostream>
 #include "clsScreenHeader.h"
-#include "clsInputValidate.h"
+#include "clsPerson.h"
 #include "clsUsers.h"
-using namespace std;
+#include "clsInputValidate.h"
 
-class clsUpdateUserScreen : protected clsScreen
+class clsUpdateUserScreen :protected clsScreen
+
 {
-
 private:
+
 
     static void _ReadUserInfo(clsUser& User)
     {
-        cout << "\n\tEnter FirstName: ";
+        cout << "\nEnter FirstName: ";
         User.FirstName = clsInputValidate::ReadString();
 
-        cout << "\n\tEnter LastName: ";
+        cout << "\nEnter LastName: ";
         User.LastName = clsInputValidate::ReadString();
 
-        cout << "\n\tEnter Email: ";
+        cout << "\nEnter Email: ";
         User.Email = clsInputValidate::ReadString();
 
-        cout << "\n\tEnter Phone: ";
+        cout << "\nEnter Phone: ";
         User.PhoneNumber = clsInputValidate::ReadString();
 
-        cout << "\n\tEnter Password: ";
+        cout << "\nEnter Password: ";
         User.Password = clsInputValidate::ReadString();
 
-        cout << "\n\tEnter Permission: ";
+        cout << "\nEnter Permission: ";
         User.Permissions = _ReadPermissionsToSet();
     }
 
     static void _PrintUser(clsUser User)
     {
-        cout << "\n\tUser Card:";
-        cout << "\n\t___________________";
-        cout << "\n\tFirstName   : " << User.FirstName;
-        cout << "\n\tLastName    : " << User.LastName;
-        cout << "\n\tFull Name   : " << User.FullName();
-        cout << "\n\tEmail       : " << User.Email;
-        cout << "\n\tPhone       : " << User.PhoneNumber;
-        cout << "\n\tUser Name   : " << User.UserName;
-        cout << "\n\tPassword    : " << User.Password;
-        cout << "\n\tPermissions : " << User.Permissions;
-        cout << "\n\t___________________\n";
+        cout << "\nUser Card:";
+        cout << "\n___________________";
+        cout << "\nFirstName   : " << User.FirstName;
+        cout << "\nLastName    : " << User.LastName;
+        cout << "\nFull Name   : " << User.FullName();
+        cout << "\nEmail       : " << User.Email;
+        cout << "\nPhone       : " << User.PhoneNumber;
+        cout << "\nUser Name   : " << User.UserName;
+        cout << "\nPassword    : " << User.Password;
+        cout << "\nPermissions : " << User.Permissions;
+        cout << "\n___________________\n";
 
     }
 
@@ -54,59 +55,60 @@ private:
         char Answer = 'n';
 
 
-        cout << "\n\tDo you want to give full access? y/n? ";
+        cout << "\nDo you want to give full access? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
             return -1;
         }
 
-        cout << "\n\tDo you want to give access to : \n ";
+        cout << "\nDo you want to give access to : \n ";
 
         cout << "\nShow Client List? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
 
+
             Permissions += clsUser::enPermissions::pListClient;
         }
 
-        cout << "\n\tAdd New Client? y/n? ";
+        cout << "\nAdd New Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
             Permissions += clsUser::enPermissions::pAddNewClient;
         }
 
-        cout << "\n\tDelete Client? y/n? ";
+        cout << "\nDelete Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
             Permissions += clsUser::enPermissions::pDeleteClient;
         }
 
-        cout << "\n\tUpdate Client? y/n? ";
+        cout << "\nUpdate Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
             Permissions += clsUser::enPermissions::pUpdateClient;
         }
 
-        cout << "\n\tFind Client? y/n? ";
+        cout << "\nFind Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
             Permissions += clsUser::enPermissions::pFindClient;
         }
 
-        cout << "\n\tTransactions? y/n? ";
+        cout << "\nTransactions? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::PTransactions;
+            Permissions += clsUser::enPermissions::pTransactions;
         }
 
-        cout << "\n\tManage Users? y/n? ";
+        cout << "\nManage Users? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
@@ -119,55 +121,65 @@ private:
 
 public:
 
-	static void ShowUpdateUserScreen()
-	{
-		clsScreen::DrawTitleHeader("\t\t  Update User Screen");
+    static void ShowUpdateUserScreen()
+    {
 
-		string Username;
-		cout << "\n\tPlease Enter Username : ";
-		Username = clsInputValidate::ReadString();
+        clsScreen::DrawTitleHeader("\t\tUpdate User Screen");
 
-		while (!clsUser::IsUserExist(Username))
-		{
-			cout << "\n\tUsername Not Found, Enter Choose Another One"
-				<< Username << " is not exist, Enter another Username : ";
-			Username = clsInputValidate::ReadString();
-		}
+        string UserName = "";
 
-		clsUser User = clsUser::Find(Username);
-		_PrintUser(User);
+        cout << "\n\tPlease Enter User UserName: ";
+        UserName = clsInputValidate::ReadString();
 
-		cout << "\n\n\tDo You Want Update This User [Y/N] ? ";
-		char Answer = 'N';
-		cin >> Answer;
+        while (!clsUser::IsUserExist(UserName))
+        {
+            cout << "\n\tUserName is not found, choose another one: ";
+            UserName = clsInputValidate::ReadString();
+        }
 
-		if (toupper(Answer) != 'Y')
-			return;
+        clsUser User1 = clsUser::Find(UserName);
 
-		cout << "\n\n\tUpdate User Info:\n" << endl;
+        _PrintUser(User1);
 
-		_ReadUserInfo(User);
+        cout << "\n\tAre you sure you want to update this User y/n? ";
 
-		clsUser::enSaveResults SaveResult;
+        char Answer = 'n';
+        cin >> Answer;
 
-		SaveResult = User.Save();
+        if (Answer == 'y' || Answer == 'Y')
+        {
 
-		switch (SaveResult)
-		{
-		case clsBankClient::enSaveResults::svSucceeded:
-		{
-			cout << "\n\tUser Updated Successfully.\n";
-			_PrintUser(User);
-			break;
-		}
+            cout << "\n\n\tUpdate User Info:";
+            cout << "\n\t____________________\n";
 
-		case clsBankClient::enSaveResults::svFailedEmptyObject:
-		{
-			cout << "\n\tUser Update Failed Because User is Empty.\n";
-			break;
-		}
-		}
-	}
+
+            _ReadUserInfo(User1);
+
+            clsUser::enSaveResults SaveResult;
+
+            SaveResult = User1.Save();
+
+            switch (SaveResult)
+            {
+            case  clsUser::enSaveResults::svSucceeded:
+            {
+                cout << "\n\tUser Updated Successfully :-)\n";
+
+                _PrintUser(User1);
+                break;
+            }
+            case clsUser::enSaveResults::svFaildEmptyObject:
+            {
+                cout << "\n\tError User was not saved because it's Empty";
+                break;
+
+            }
+
+            }
+
+        }
+
+    }
 
 };
 
