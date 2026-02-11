@@ -4,7 +4,7 @@
 #include <iomanip>
 #include "clsUsers.h"
 #include "Global.h"
-
+#include"clsDate.h"
 
 using namespace std;
 
@@ -22,6 +22,17 @@ public:
 			cout << "\t\t\t\t" << SubTitle << "\n";
 
 		cout << "\t\t\t\t\t=====================================\n";
+
+		if (CurrentUser.IsEmpty())
+		{
+			cout << "\n\t\t\t\t\tUser : " ;
+		}
+		else
+			cout << "\n\t\t\t\t\tUser : " <<  CurrentUser.UserName;
+
+		cout << "\n\t\t\t\t\tDate : " << clsDate::DateToString(clsDate()) << endl;
+		cout << "\n\t\t\t\t\t=====================================\n\n";
+
 	}
 
 	static bool CheckAccessRights(int RequiredPermissions)
