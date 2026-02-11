@@ -6,4 +6,4 @@ using namespace std;
 
 clsUser CurrentUser = clsUser::Find("", "");
 
-
+int CounterLoginFailds = 3;

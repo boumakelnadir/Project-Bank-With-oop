@@ -19,12 +19,23 @@ private:
 		string UserName, Password;
 
 		bool LoginFailed = false;
+		
 
 		do
 		{
+			
 			if (LoginFailed)
 			{
+				CounterLoginFailds--;
 				cout << "\n\tInvalid UserName or Password, Please try again.\n";
+				cout << "\tYou have " << CounterLoginFailds << " Trials to Login" << endl;
+				
+			}
+
+			if (CounterLoginFailds == 0)
+			{
+				cout << "\n\tYou are Locked After 3 Faild Trails" << endl;
+				return;
 			}
 
 			cout << "\n\tPlease enter UserName: ";
