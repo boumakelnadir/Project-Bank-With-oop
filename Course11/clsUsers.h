@@ -163,8 +163,9 @@ public:
 
     enum enPermissions
     {
-        pAll = -1, pListClient = 1, pAddNewClient = 2, pDeleteClient = 4,
-        pUpdateClient = 8, pFindClient = 16, pTransactions = 32, pManageUsers = 64
+        pAll = -1, pListClient = 1, pAddNewClient = 2,
+        pDeleteClient = 4, pUpdateClient = 8, pFindClient = 16,
+        pTransactions = 32, pManageUsers = 64
     };
 
     clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, 
@@ -353,6 +354,27 @@ public:
     {
         return _LoadUsersDataFromFile();
     }
+
+    bool CheckAccessPermission(enPermissions Permission)
+    {
+        if (this->Permissions == enPermissions::pAll)
+        {
+            return true;
+        }
+
+        if ((this->Permissions & Permission) == Permission)
+        {
+            return true;
+        }
+        else
+            return false;
+    };
+
+	bool IsAdmin()
+	{
+		return (this->Permissions == enPermissions::pAll);
+    }
+
 
 
 };

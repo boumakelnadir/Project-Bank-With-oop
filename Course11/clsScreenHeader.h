@@ -1,6 +1,11 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include "clsUsers.h"
+#include "Global.h"
+
+
 using namespace std;
 
 
@@ -18,5 +23,21 @@ public:
 
 		cout << "\t\t\t\t\t=====================================\n";
 	}
+
+	static bool CheckAccessRights(int RequiredPermissions)
+	{
+		if ((CurrentUser.Permissions & RequiredPermissions) == RequiredPermissions)
+		{
+			return true;
+		}
+		else
+		{
+			DrawTitleHeader("\t\t     Access Denied Screen");
+
+			cout << "\n\tSorry, You don't have the required permissions to access this screen.\n";
+			return false;
+		}
+	}
+
 };
 

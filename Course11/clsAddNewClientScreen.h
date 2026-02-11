@@ -51,6 +51,11 @@ public:
 	static void ShowAddNewClient()
 	{
 
+		if (!CheckAccessRights(clsUser::enPermissions::pAddNewClient))
+		{
+			return;
+		}
+
 		clsScreen::DrawTitleHeader("\t\t  Add New Client Screen");
 
 		cout << "\n\tDo You Want Add New Client [Y/N] ? ";

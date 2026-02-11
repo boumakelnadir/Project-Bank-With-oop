@@ -12,6 +12,7 @@
 #include "clsFindClientScreen.h"
 #include "clsTransactionMenu.h"
 #include "clsManageUsersScreen.h"
+#include "Global.h"
 
 
 using namespace std;
@@ -67,6 +68,11 @@ private:
 		clsManageUsersScreen::ShowManageUsersScreen();
 	};
 	
+	static void _ShowLogOutScreen()
+	{
+		CurrentUser = clsUser::Find("", "");
+	};
+
 	static void _GoBackToMainMenue()
 	{
 		cout << "\n\tPress Any Key To Go Back Main Menu..." ;
@@ -144,6 +150,7 @@ private:
 			case eLogout:
 			{
 				_ClearScreen();
+				_ShowLogOutScreen();
 				break;
 			}
 		}
@@ -153,6 +160,8 @@ public:
 
 	static void ShowMainMenue()
 	{
+		_ClearScreen();
+
 		clsScreen::DrawTitleHeader("\t\tMain Menue Screen");
 
 		cout << "\t\t\t\t\t[1]. Show Client List.\n";

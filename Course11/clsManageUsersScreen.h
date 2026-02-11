@@ -127,6 +127,11 @@ public:
 	
 	static void ShowManageUsersScreen()
 	{
+		if (!CheckAccessRights(clsUser::enPermissions::pManageUsers))
+		{
+			return;
+		}
+
 		clsScreen::DrawTitleHeader("\t\tManage Users Screen");
 
 		cout << "\n\n\t\t\t\t\t=====================================";

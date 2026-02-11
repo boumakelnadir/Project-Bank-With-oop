@@ -110,6 +110,11 @@ public:
 
 	static void ShowTransactionMenueScreen()
 	{
+		if (!clsScreen::CheckAccessRights(clsUser::enPermissions::pTransactions))
+		{
+			return;
+		}
+
 		clsScreen::DrawTitleHeader("\t\tTransactions Screen");
 
 		cout << "\n\n\t\t\t\t\t=====================================";
