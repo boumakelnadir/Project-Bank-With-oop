@@ -151,6 +151,7 @@
     <ClInclude Include="clsTitleHeader.h" />
     <ClInclude Include="clsTotalBalancesScreen.h" />
     <ClInclude Include="clsTransactionMenu.h" />
+    <ClInclude Include="clsTransferMoneyLogScreen.h" />
     <ClInclude Include="clsTransferMoneyScreen.h" />
     <ClInclude Include="clsUpdateClientScreen.h" />
     <ClInclude Include="clsUpdateUserScreen.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="clsWithdrawMoneyScreen.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="TransferLoginHistory.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Course11.rc" />

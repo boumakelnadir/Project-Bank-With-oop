@@ -56,18 +56,18 @@ public:
 
 		while (Amount <= 0 || Amount > ClientFrom.AccountBalance)
 		{
-			cout << "\n\tInvalid Amount, Try Again: ";
 			cout << "\n\tYour Balance Is: " << ClientFrom.AccountBalance << "$";
+			cout << "\n\tInvalid Amount, Try Again: ";
 			Amount = clsInputValidate::ReadDblNumber();
 		}
 
 		cout << "\tAre You Sure You Want To Transfer " << Amount << "$ From " << ClientFrom.FullName() << " To " << clsBankClient::Find(ToAccountNumber).FullName() << "? (Y/N): ";
-		char Answer ;
+		char Answer;
 		cin >> Answer;
 
 		clsBankClient ClientTo = clsBankClient::Find(ToAccountNumber);
-		
-		if ( toupper(Answer) == 'N')
+
+		if (toupper(Answer) == 'N')
 		{
 			return;
 		}
@@ -76,7 +76,8 @@ public:
 			if (ClientFrom.Transfer(ClientTo, Amount))
 			{
 				cout << "\n\tTransfer Done Successfully.";
-			
+
+
 				PrintClientCard(ClientFrom);
 				PrintClientCard(ClientTo);
 			}
@@ -85,8 +86,9 @@ public:
 				cout << "\n\tTransfer Failed.";
 				return;
 			}
-			
+
 		}
 
 	}
+
 };

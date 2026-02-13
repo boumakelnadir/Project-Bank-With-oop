@@ -5,6 +5,8 @@
 #include<fstream>
 #include"clsPerson.h"
 #include"clsString.h"
+#include"clsDate.h"
+
 
 using namespace std;
 
@@ -123,6 +125,53 @@ private:
 		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
 	}
 
+	string _PrepareLogInToLine(double Amount ,clsBankClient ToClient,  string UserName , string Delim = "#//#")
+	{
+		string TransferLogRecord = "";
+
+		TransferLogRecord += clsDate::GetSystemDateTimeNowString() + Delim;
+		TransferLogRecord += this->GetAccountNumber() + Delim;
+		TransferLogRecord += ToClient.GetAccountNumber() + Delim;
+		TransferLogRecord += to_string(Amount) + Delim;
+		TransferLogRecord += to_string(this->AccountBalance) + Delim;
+		TransferLogRecord += to_string(ToClient.AccountBalance) + Delim;
+		TransferLogRecord += UserName ;
+
+		return TransferLogRecord;
+	}
+
+	void _RegesterTransferLogin(double Amount, clsBankClient ToClient ,string UserName)
+	{
+		 string stDataLine = _PrepareLogInToLine(Amount, ToClient, UserName);
+
+		 fstream MyFile;
+		 MyFile.open("TransferLoginHistory.txt", ios::out | ios::app);
+
+		 if (MyFile.is_open())
+		 {
+			 MyFile << stDataLine << endl;
+			 MyFile.close();
+		 }
+	}
+
+	struct stTransferLogRecordList;
+	static stTransferLogRecordList _ConvertTransferLogLineToRecord(string Line, string Delim = "#//#")
+	{
+		vector <string> vTransferLogData = clsString::Split(Line, Delim);
+
+		stTransferLogRecordList Record;
+
+		Record.DateTime = vTransferLogData[0];
+		Record.FromAccountNumber = vTransferLogData[1];
+		Record.ToAccountNumber = vTransferLogData[2];
+		Record.Amount = stod(vTransferLogData[3]);
+		Record.FromAccountBalance = stod(vTransferLogData[4]);
+		Record.ToAccountBalance = stod(vTransferLogData[5]);
+		Record.UserName = vTransferLogData[6];
+
+		return Record;
+	}
+
 public:
 
 	clsBankClient(enMode Mode, string FirstName, string LastName, string Email, string PhoneNumber,
@@ -134,6 +183,17 @@ public:
 		_AccountNumber = AccountNumber;
 		_AccountBalance = AccountBalance;
 	}
+
+	struct stTransferLogRecordList
+	{
+		string DateTime;
+		string FromAccountNumber;
+		string ToAccountNumber;
+		double Amount;
+		double FromAccountBalance;
+		double ToAccountBalance;
+		string UserName;
+	};
 
 	bool IsEmpty()
 	{
@@ -348,10 +408,35 @@ public:
 		
 		this->Withdraw(Amount);
 		ToClient.Deposit(Amount);
+		_RegesterTransferLogin(Amount, ToClient, CurrentUser.UserName);
 
 		return true;
 		
 	}
+
+	static vector <stTransferLogRecordList> GetTransferLogList()
+	{
+		vector <stTransferLogRecordList> vTransferLogList;
+
+		fstream MyFile;
+
+		MyFile.open("TransferLoginHistory.txt", ios::in);
+		if (MyFile.is_open())
+		{
+			string Line;
+			while (getline(MyFile, Line))
+			{
+				stTransferLogRecordList Record = _ConvertTransferLogLineToRecord(Line);
+
+				vTransferLogList.push_back(Record);
+				
+			}
+			MyFile.close();
+		}
+		return vTransferLogList;
+	}
+
+
 
 };
 

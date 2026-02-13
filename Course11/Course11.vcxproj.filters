@@ -125,7 +125,13 @@
     <ClInclude Include="clsLoginRegisterScreen.h">
       <Filter>Header Files\clsMainScreen</Filter>
     </ClInclude>
+    <ClInclude Include="TransferLoginHistory.h">
+      <Filter>Header Files\Log in</Filter>
+    </ClInclude>
     <ClInclude Include="clsTransferMoneyScreen.h">
+      <Filter>Header Files\Sub Menue Transaction</Filter>
+    </ClInclude>
+    <ClInclude Include="clsTransferMoneyLogScreen.h">
       <Filter>Header Files\Sub Menue Transaction</Filter>
     </ClInclude>
   </ItemGroup>
