@@ -68,8 +68,6 @@ private:
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-
-
             Permissions += clsUser::enPermissions::pListClient;
         }
 
@@ -113,6 +111,13 @@ private:
         if (Answer == 'y' || Answer == 'Y')
         {
             Permissions += clsUser::enPermissions::pManageUsers;
+        }
+
+        cout << "\n\tLogin Register? y/n? ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            Permissions += clsUser::enPermissions::pLogInRegister;
         }
 
         return Permissions;

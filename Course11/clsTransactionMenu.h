@@ -8,7 +8,7 @@
 #include "clsDepositScreen.h"
 #include "clsWithdrawMoneyScreen.h"
 #include "clsTotalBalancesScreen.h"
-
+#include "clsTransferMoneyScreen.h"
 
 using namespace std;
 
@@ -22,7 +22,8 @@ private:
 		eDepositMoney = 1,
 		eWithdrawMoney = 2,
 		eTotalBalancesMoney = 3,
-		eBackToMainMenu = 4
+		eTransferMoney = 4,
+		eBackToMainMenu = 5
 	};
 
 	static void _GoBackToMainMenue()
@@ -61,11 +62,16 @@ private:
 		clsTotalBalancesScreen::ShowTotalBalancesScreen();
 	};
 	
+	static void _ShowTransferMoneyScreen()
+	{
+		clsTransferMoneyScreen::ShowTransferMoneyScreen();
+	};
+
 	static int _ReadTransactionMenuOption()
 	{
 		int Choice;
-		cout << "\n\t\t\t\t\tPlease choose what do you want to do? (1-4): ";
-		Choice = clsInputValidate::ReadIntNumberBetween(1, 4, "\nNumber is Not a Range [1-8] , Choose Again :");
+		cout << "\n\t\t\t\t\tPlease choose what do you want to do? (1-5): ";
+		Choice = clsInputValidate::ReadIntNumberBetween(1, 5, "\nNumber is Not a Range [1-5] , Choose Again :");
 		return Choice;
 	}
 
@@ -97,9 +103,17 @@ private:
 				break;
 			}
 
-			case eBackToMainMenu:
+			case eTransferMoney:
 			{
 				_ClearScreen();
+				_ShowTransferMoneyScreen();
+				_GoBackToTransactionMenue();
+				break;
+			}
+
+			case eBackToMainMenu:
+			{
+				//_ClearScreen();
 				break;
 			}
 
@@ -123,7 +137,8 @@ public:
 		cout << "\t\t\t\t\t[1]. Deposit Money.\n";
 		cout << "\t\t\t\t\t[2]. Withdraw Money.\n";
 		cout << "\t\t\t\t\t[3]. Total Balances Money.\n";
-		cout << "\t\t\t\t\t[4]. Back To Main Menu.\n";
+		cout << "\t\t\t\t\t[4]. Transfer Money.\n";
+		cout << "\t\t\t\t\t[5]. Back To Main Menu.\n";
 		cout << "\t\t\t\t\t=====================================\n";
 		
 		_PerformTransactionMenueOption((enTransactionMenuOptions)_ReadTransactionMenuOption());

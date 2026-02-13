@@ -123,7 +123,10 @@
       <Filter>Header Files\clsGlobal</Filter>
     </ClInclude>
     <ClInclude Include="clsLoginRegisterScreen.h">
-      <Filter>Header Files\Log in</Filter>
+      <Filter>Header Files\clsMainScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="clsTransferMoneyScreen.h">
+      <Filter>Header Files\Sub Menue Transaction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
