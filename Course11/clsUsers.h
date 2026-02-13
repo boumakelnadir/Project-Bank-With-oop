@@ -4,6 +4,7 @@
 #include <iomanip>
 #include "clsPerson.h"
 #include "clsString.h"
+#include "clsDate.h"
 #include <vector>
 #include <fstream>
 
@@ -38,6 +39,24 @@ private:
             vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
 
     }
+
+	struct stLoginRegisterRecord;
+    static stLoginRegisterRecord _ConvertLinetoLoginRegisterRecord(string Line, string Seperator = "#//#")
+	{
+		vector<string> vData = clsString::Split(Line, Seperator);
+		
+        if (vData.size() < 4)
+		{
+			return stLoginRegisterRecord();
+		}
+
+		stLoginRegisterRecord Record;
+		Record.DateTime = vData[0];
+		Record.UserName = vData[1];
+		Record.Password = vData[2];
+		Record.Permissions = stoi(vData[3]);
+		return Record;
+	}
 
     static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#")
     {
@@ -159,14 +178,34 @@ private:
         return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+    string _PrepareLogInRecord(string Delim = "#//#")
+    {
+        string LineRecord = "";
+        
+        LineRecord += clsDate::GetSystemDateTimeNowString() + Delim;
+        LineRecord += UserName + Delim;
+        LineRecord += Password + Delim;
+        LineRecord += to_string(Permissions);
+
+        return LineRecord;
+    }
+
 public:
 
     enum enPermissions
     {
         pAll = -1, pListClient = 1, pAddNewClient = 2,
         pDeleteClient = 4, pUpdateClient = 8, pFindClient = 16,
-        pTransactions = 32, pManageUsers = 64
+		pTransactions = 32, pManageUsers = 64, pLogInRegister = 128
     };
+
+	struct stLoginRegisterRecord
+	{
+		string DateTime;
+		string UserName;
+		string Password;
+		int Permissions;
+	};
 
     clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, 
         string UserName, string Password, int Permissions) :
@@ -375,7 +414,41 @@ public:
 		return (this->Permissions == enPermissions::pAll);
     }
 
+    void RegisterLogin()
+    {
+        string DataLine = _PrepareLogInRecord();
+        
+        fstream File;
+        File.open("HistoryLoginFile.txt", ios::out | ios::app);
 
+        if (File.is_open())
+        {
+            File << DataLine << endl;
+
+            File.close();
+        }
+    }
+
+    static vector <stLoginRegisterRecord> GetLoginRegisterRecordsList()
+    {
+        vector <stLoginRegisterRecord> vLoginRegisterRecords;
+
+        fstream MyFile;
+        MyFile.open("HistoryLoginFile.txt", ios::in);//read Mode
+
+        if (MyFile.is_open())
+        {
+            string Line;
+            while (getline(MyFile, Line))
+            {
+                stLoginRegisterRecord Record = _ConvertLinetoLoginRegisterRecord(Line);
+
+                vLoginRegisterRecords.push_back(Record);
+            }
+            MyFile.close();
+        }
+        return vLoginRegisterRecords;
+    }
 
 };
 

@@ -6,6 +6,8 @@
 #include "clsMainScreen.h"
 #include"Global.h"
 
+
+
 using namespace std;
 
 
@@ -51,6 +53,8 @@ private:
 
 		} while (LoginFailed);
 		
+		CurrentUser.RegisterLogin();
+
 		clsMainScreen::ShowMainMenue();
 	}
 

@@ -13,6 +13,7 @@
 #include "clsTransactionMenu.h"
 #include "clsManageUsersScreen.h"
 #include "Global.h"
+#include "clsLoginRegisterScreen.h"
 
 
 using namespace std;
@@ -30,7 +31,8 @@ private:
 		eFindClient = 5,
 		eTransactions = 6,
 		eManageUsers = 7,
-		eLogout = 8
+		eLogInRegister = 8,
+		eLogout = 9
 	};
 
 	static void _ShowClientsListScreen() 
@@ -68,6 +70,11 @@ private:
 		clsManageUsersScreen::ShowManageUsersScreen();
 	};
 	
+	static void _ShowLogInRegisterScreen()
+	{
+		clsLoginRegisterScreen::ShowLoginRegisterScreen();
+	};
+
 	static void _ShowLogOutScreen()
 	{
 		CurrentUser = clsUser::Find("", "");
@@ -89,8 +96,8 @@ private:
 	static int _ReadMainMenuOption()
 	{
 		int Choice  ;
-		cout << "\n\t\t\t\t\tPlease choose what do you want to do? (1-8): ";
-		Choice = clsInputValidate::ReadIntNumberBetween(1, 8, "\nNumber is Not a Range [1-8] , Choose Again :");
+		cout << "\n\t\t\t\t\tPlease choose what do you want to do? (1-9): ";
+		Choice = clsInputValidate::ReadIntNumberBetween(1, 9, "\nNumber is Not a Range [1-9] , Choose Again :");
 		return Choice;
 	}
 
@@ -147,6 +154,13 @@ private:
 				_GoBackToMainMenue();
 				break;
 			}
+			case eLogInRegister:
+			{
+				_ClearScreen();
+				_ShowLogInRegisterScreen();
+				_GoBackToMainMenue();
+				break;
+			}
 			case eLogout:
 			{
 				_ClearScreen();
@@ -171,7 +185,8 @@ public:
 		cout << "\t\t\t\t\t[5]. Find Client.\n";
 		cout << "\t\t\t\t\t[6]. Transactions.\n";
 		cout << "\t\t\t\t\t[7]. Manage Users.\n";
-		cout << "\t\t\t\t\t[8]. Logout.\n";
+		cout << "\t\t\t\t\t[8]. LogIn Register.\n";
+		cout << "\t\t\t\t\t[9]. Logout.\n";
 		cout << "\t\t\t\t\t=====================================\n";
 
 		_PerformMainMenueOption((_enMainMenuOptions)_ReadMainMenuOption());

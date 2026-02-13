@@ -122,6 +122,9 @@
     <ClInclude Include="Global.h">
       <Filter>Header Files\clsGlobal</Filter>
     </ClInclude>
+    <ClInclude Include="clsLoginRegisterScreen.h">
+      <Filter>Header Files\Log in</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Course11.rc">
