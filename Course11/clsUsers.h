@@ -7,7 +7,7 @@
 #include "clsDate.h"
 #include <vector>
 #include <fstream>
-
+#include "clsUtil.h"
 
 
 using namespace std;
@@ -36,7 +36,7 @@ private:
         }
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-            vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+            vUserData[3], vUserData[4], clsUtil::DecryptText(vUserData[5]), stoi(vUserData[6]));
 
     }
 
@@ -53,21 +53,22 @@ private:
 		stLoginRegisterRecord Record;
 		Record.DateTime = vData[0];
 		Record.UserName = vData[1];
-		Record.Password = vData[2];
+        Record.Password = clsUtil::DecryptText(vData[2]);
 		Record.Permissions = stoi(vData[3]);
+
 		return Record;
 	}
 
     static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#")
     {
-
         string UserRecord = "";
+
         UserRecord += User.FirstName + Seperator;
         UserRecord += User.LastName + Seperator;
         UserRecord += User.Email + Seperator;
         UserRecord += User.PhoneNumber + Seperator;
         UserRecord += User.UserName + Seperator;
-        UserRecord += User.Password + Seperator;
+        UserRecord += clsUtil::EncryptText(User.Password) + Seperator;
         UserRecord += to_string(User.Permissions);
 
         return UserRecord;
@@ -184,7 +185,7 @@ private:
         
         LineRecord += clsDate::GetSystemDateTimeNowString() + Delim;
         LineRecord += UserName + Delim;
-        LineRecord += Password + Delim;
+        LineRecord += clsUtil::EncryptText(Password)+Delim;
         LineRecord += to_string(Permissions);
 
         return LineRecord;
