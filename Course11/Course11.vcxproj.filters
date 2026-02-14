@@ -36,7 +36,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Course11.cpp">
+    <ClCompile Include="Banking System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,7 +136,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Course11.rc">
+    <ResourceCompile Include="Banking System.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
