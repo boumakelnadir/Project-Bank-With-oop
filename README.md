@@ -1,54 +1,57 @@
-🏦 Advanced Bank Management System (C++ OOP)
+🏦 Secure Banking System (C++ OOP)
 
-🌟 Overview
-This is a comprehensive, console-based Banking System built with C++ using Object-Oriented Programming (OOP). It focuses on clean architecture, secure data handling via flat-files, and a professional user-permission system.
+📌 Technical Overview
 
-The project is designed with Separation of Concerns in mind, keeping the Business Logic independent of the Presentation Layer (UI).
+This is a sophisticated Banking Management System built with C++11, demonstrating advanced Object-Oriented Programming patterns. The project is architected with a strict separation between the Presentation Layer (Screens) and the Business Logic Layer, ensuring maintainability and scalability.
 
-🛠️ Core Features
-1. 👥 Client Management
-Complete CRUD: Create, Read, Update, and Delete client profiles.
+Unlike simple console apps, this system implements File-Based Database Management with custom Encryption Algorithms to ensure data security at rest.
 
-Smart Search: Instant lookup by account number.
+⚙️ Core System Architecture
 
-File Persistence: All data is saved and managed through structured text files.
+1. 🛡️ Security & Encryption Engine
 
-2. 💰 Financial Transactions (Advanced Logic)
-Deposit & Withdraw: Real-time balance validation and updates.
+Custom Encryption Logic: Implemented strictly in clsUtil, the system uses a Symmetric Encryption Algorithm (Key-based shifting) to scramble data.
 
-💸 Secure Money Transfer: A robust logic to transfer funds between accounts with automated balance checks for both parties.
+Data at Rest Protection: All sensitive files (Clients.txt, Users.txt) are encrypted. If a file is opened externally, the content is unreadable (Ciphertext).
 
-Total Balances: High-level summary reports for all bank assets.
+Seamless Decryption: The system automatically decrypts data into objects upon loading, providing a seamless user experience while maintaining high security.
 
-3. 🔐 Security & User Management
-Multi-User Login: Secure authentication system.
+2. 💸 Advanced Financial Operations
 
-Granular Permissions: Bitwise-based permission system allows administrators to define exactly what each user can or cannot access (e.g., restricted access to Delete or Transfer screens).
+Atomic Transfer System: The Transfer operation is designed as an atomic transaction. It validates the sender's balance, withdraws from the source, deposits to the destination, and updates both records in the file system simultaneously.
 
-4. 📜 Professional Audit Logs (Login Register)
-Login History Tracking: Automatically records every login attempt.
+Transaction Auditing: A dedicated TransferLog system tracks every financial movement.
 
-Detailed Logs: Captures Username, Timestamp, Password used, and Permissions at the moment of entry.
+Accountability Protocol: The code captures the Current Active User (Admin) from the session context and logs their username alongside the transaction, ensuring full traceability of who authorized the transfer.
 
-Self-Healing Data: The system is designed to automatically create or append to log files, ensuring no runtime crashes if files are missing.
+3. 🏗️ Professional OOP Structure
 
-🏗️ Technical Architecture
-Encapsulation & Inheritance: Clear hierarchy starting from a base clsPerson class.
+Abstract Base Classes: Uses clsPerson as a blueprint for clsClient and clsUser.
 
-Decoupled Screens: Every screen is a separate class, preventing Circular Dependencies and making the code highly maintainable.
+Static Methods: Extensive use of static methods for utility functions and finding objects, reducing memory overhead.
 
-Memory Management: Efficient use of STL Vectors and File Streams (fstream) for data processing.
+Composition: The screens utilize clsInputValidate for robust data handling, preventing runtime errors due to invalid inputs.
 
-Input Validation: A dedicated utility class to handle and sanitize user inputs, preventing system errors.
+🚀 Key Features List
 
-🚀 How to Run
-Clone the repository.
+CRUD Operations: (Create, Read, Update, Delete) for Clients and Users.
 
-Ensure you have the Course11 folder structure intact.
+Transaction Screen: Deposit, Withdraw, and Transfer with real-time file updates.
 
-Compile the Main.cpp using any C++ compiler (C++11 or higher recommended).
+Security Logs:
 
-Run the executable and use the admin credentials found in Users.txt.
+LoginRegister.txt: Logs entry times and user permissions.
 
-👨‍💻 My Philosophy
-I believe that "Clean code is code that looks like it was written by someone who cares." This project isn't just about functionality; it's about writing readable, scalable, and professional code that follows industry best practices.
+TransferLog.txt: Logs financial activities with User Attribution.
+
+Permission System: Bitwise Access Control to restrict specific features based on user roles.
+
+🛠️ Tech Stack
+
+Language: C++ (Standard 11/17)
+
+Paradigm: OOP (Encapsulation, Inheritance, Polymorphism)
+
+Data Persistence: Flat-file database with Custom Parsing & Encryption.
+
+IDE: VS Code / Visual Studio.
