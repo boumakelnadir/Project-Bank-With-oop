@@ -24,7 +24,7 @@
     <ProjectGuid>{ff4a15bb-c2fb-4356-b424-1caef28c76aa}</ProjectGuid>
     <RootNamespace>Course11</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Banking System</ProjectName>
+    <ProjectName>Banking System+(OOP)</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -129,7 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Banking System.cpp" />
+    <ClCompile Include="Banking System+%28OOP%29.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clsAddNewClientScreen.h" />
@@ -165,7 +165,7 @@
     <ClInclude Include="TransferLoginHistory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Banking System.rc" />
+    <ResourceCompile Include="Banking System+%28OOP%29.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
